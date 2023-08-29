@@ -15,6 +15,24 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+
+            $table
+                ->tinyInteger('role')
+                ->default(\App\Enums\UserRole::User->value);
+
+            // profile
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->text('address')->nullable();
+            $table->string('country', 2)->nullable();
+            $table->string('city')->nullable();
+            $table->string('state_province')->nullable();
+            $table->string('zip_code', 10)->nullable();
+
+            // payment
+            $table->string('card_number', 20)->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
