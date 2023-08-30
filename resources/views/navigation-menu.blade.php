@@ -110,7 +110,9 @@
 
                         <x-slot name="content">
 
-                             <!-- Administration -->
+                            @can('accessAdministration')
+
+                                <!-- Administration -->
                              <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Administration') }}
                             </div>
@@ -133,6 +135,10 @@
 
                             <div class="border-t border-gray-200"></div>
 
+
+
+                            @endcan
+
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
@@ -141,6 +147,7 @@
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
+
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
