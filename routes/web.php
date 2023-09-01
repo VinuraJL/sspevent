@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\EventController as EventController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,32 +22,30 @@ Route::middleware([
     'role:admin'
     ])
     ->prefix('admin')
+    ->name('admin.')
     ->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
 
-    Route::get('/events', function () {
-        return view('admin.event.index');
-    })->name('admin.event.index');
+    Route::resource('/events', AdminEventController::class);
 
     Route::get('/categories', function () {
         return view('admin.category.index');
-    })->name('admin.category.index');
+    })->name('category.index');
 
     Route::get('/reservations', function () {
         return view('admin.reservation.index');
-    })->name('admin.reservation.index');
+    })->name('reservation.index');
 
     Route::get('/users', function () {
-        return view('admin.user.index');
-    })->name('admin.user.index');
-
-
+        return view('admin.users.index');
+    })->name('user.index');
 });
 
-Route::get('event/{id}', function($id){
+
+Route::get('event/{id}', function ($id) {
     return view('event.show', [
         'event' => $id
     ]);
